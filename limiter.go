@@ -9,10 +9,10 @@ type Limiter struct {
 }
 
 var (
-	defaultMemAdapter          = adapter.NewMemAdapter()
-	defaultLimiter    *Limiter = NewLimiter(&defaultMemAdapter)
+	defaultMemAdapter          = adapter.NewAdapterRedis()
+	defaultLimiter    *Limiter = New(&defaultMemAdapter)
 )
 
-func NewLimiter(adapter *Adapter) *Limiter {
+func New(adapter *Adapter) *Limiter {
 	return &Limiter{adapter: adapter}
 }
