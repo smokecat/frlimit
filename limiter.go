@@ -1,18 +1,15 @@
 package frlimit
 
-import (
-	"github.com/smokecat/frlimit/adapter"
-)
+type Limiter interface {
+	// Check true if consume given amount successfully.
+	Check(key string, amount, capacity, period int) (bool, error)
 
-type Limiter struct {
-	adapter *Adapter
-}
+	// Count increase and return count.
+	Count(key string) (int, error)
 
-var (
-	defaultMemAdapter          = adapter.NewAdapterRedis()
-	defaultLimiter    *Limiter = New(&defaultMemAdapter)
-)
+	// ResetCheck delete check key.
+	ResetCheck(key string) (exists bool, err error)
 
-func New(adapter *Adapter) *Limiter {
-	return &Limiter{adapter: adapter}
+	// ResetCount delete count key.
+	ResetCount(key string) (exists bool, err error)
 }
