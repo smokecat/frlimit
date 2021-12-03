@@ -2,7 +2,7 @@ package frlimit
 
 type Limiter interface {
 	// Check true if consume given amount successfully.
-	Check(key string, amount, capacity, period int) (bool, error)
+	Check(key string, amount, capacity, period int64) (bool, error)
 
 	// Count increase and return count.
 	Count(key string) (int, error)
