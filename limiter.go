@@ -1,8 +1,12 @@
 package frlimit
 
+import (
+	"time"
+)
+
 type Limiter interface {
 	// Check true if consume given amount successfully.
-	Check(key string, amount, capacity, period int64) (bool, error)
+	Check(key string, amount, capacity int64, period time.Duration) (bool, error)
 
 	// Count increase and return count.
 	Count(key string) (int, error)
